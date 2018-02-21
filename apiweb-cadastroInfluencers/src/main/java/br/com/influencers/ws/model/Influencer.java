@@ -23,7 +23,7 @@ public class Influencer implements Serializable{
 	private String email;
 	private String instagram;
 	@OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-	private List<SocialMedia> socilNetworks;
+	private List<SocialMedia> socialNetworks;
 	public Long getId() {
 		return id;
 	}
@@ -40,7 +40,7 @@ public class Influencer implements Serializable{
 		return instagram;
 	}
 	public List<SocialMedia> getSocilNetworks() {
-		return socilNetworks;
+		return socialNetworks;
 	}
 	public void setId(Long id) {
 		this.id = id;
@@ -57,8 +57,8 @@ public class Influencer implements Serializable{
 	public void setInstagram(String instagram) {
 		this.instagram = instagram;
 	}
-	public void setSocilNetworks(List<SocialMedia> socilNetworks) {
-		this.socilNetworks = socilNetworks;
+	public void setSocialNetworks(List<SocialMedia> socilNetworks) {
+		this.socialNetworks = socilNetworks;
 	}
 	@Override
 	public int hashCode() {
