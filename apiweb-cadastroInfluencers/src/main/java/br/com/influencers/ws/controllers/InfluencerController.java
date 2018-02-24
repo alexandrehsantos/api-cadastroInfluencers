@@ -22,6 +22,8 @@ public class InfluencerController {
 	@RequestMapping(method = RequestMethod.POST, value = "/register", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Influencer> registerInfluencer(@RequestBody InfluencerFilter filter) {
 
+		influencerService.save(filter);
+
 		return new ResponseEntity<>(influencerService.save(filter), HttpStatus.OK);
 	}
 

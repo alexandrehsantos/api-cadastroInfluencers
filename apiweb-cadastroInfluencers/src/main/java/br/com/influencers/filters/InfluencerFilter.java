@@ -2,6 +2,8 @@ package br.com.influencers.filters;
 
 import java.util.List;
 
+import br.com.influencers.ws.model.BankAccount;
+
 public class InfluencerFilter {
 
 	private String name;
@@ -9,7 +11,7 @@ public class InfluencerFilter {
 	private String email;
 	private String instagram;
 	private List<SocialMediaFilter> socialMedia;
-	
+	private List<BankAccount> bankAccounts;
 	
 	public String getName() {
 		return name;
@@ -40,6 +42,12 @@ public class InfluencerFilter {
 	}
 	public void setSocialMedia(List<SocialMediaFilter> socialMedia) {
 		this.socialMedia = socialMedia;
+	}
+	public List<BankAccount> getBankAccounts() {
+		return bankAccounts;
+	}
+	public void setBankAccounts(List<BankAccount> bankAccounts) {
+		this.bankAccounts = bankAccounts;
 	}
 	
 	
