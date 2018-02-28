@@ -6,12 +6,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.influencers.filters.InfluencerFilter;
-import br.com.influencers.filters.SocialMediaFilter;
+import br.com.influencers.ws.controllers.InfluencerController;
+import br.com.influencers.ws.converters.InfluencerConverter;
 import br.com.influencers.ws.model.Influencer;
 import br.com.influencers.ws.model.SocialMedia;
 import br.com.influencers.ws.repository.InfluencerRepository;
 import br.com.influencers.ws.repository.SocialMediaRepository;
+import br.com.influencers.ws.vo.InfluencerVO;
+import br.com.influencers.ws.vo.SocialMediaVO;
 
 @Service
 public class InfluencerService {
@@ -22,7 +24,10 @@ public class InfluencerService {
 	@Autowired
 	private SocialMediaRepository socialMediaRepository;
 
-	public Influencer save(InfluencerFilter influencerFilter) {
+	@Autowired
+	private InfluencerConverter influencerConverter;
+
+	public Influencer save(InfluencerVO influencerFilter) {
 
 		Influencer influencer = new Influencer();
 		List<SocialMedia> socialNetworksEntityList = new ArrayList<>();
@@ -32,8 +37,8 @@ public class InfluencerService {
 		influencer.setName(influencerFilter.getName());
 		influencer.setPhone(influencerFilter.getPhone());
 
-		List<SocialMediaFilter> socialMediaFilter = influencerFilter.getSocialMedia();
-		for (SocialMediaFilter socialMedia : socialMediaFilter) {
+		List<SocialMediaVO> socialMediaFilter = influencerFilter.getSocialMedia();
+		for (SocialMediaVO socialMedia : socialMediaFilter) {
 			socialNetworksEntityList.add(socialMediaRepository.findOne(socialMedia.getId()));
 		}
 
@@ -41,6 +46,11 @@ public class InfluencerService {
 
 		return influencerRepository.save(influencer);
 
+	}
+
+	public List<InfluencerVO> findAll() {
+
+		return influencerConverter.entityParaVO(influencerRepository.findAll());
 	}
 
 }

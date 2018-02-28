@@ -1,56 +1,71 @@
-package br.com.influencers.filters;
+package br.com.influencers.ws.vo;
 
 import java.util.List;
 
 import br.com.influencers.ws.model.BankAccount;
 
-public class InfluencerFilter {
+public class InfluencerVO {
 
 	private String name;
 	private String phone;
 	private String email;
 	private String instagram;
-	private List<SocialMediaFilter> socialMedia;
+	private List<SocialMediaVO> socialMedia;
 	private List<BankAccount> bankAccounts;
-	
+
 	public String getName() {
 		return name;
 	}
+
 	public String getPhone() {
 		return phone;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public String getInstagram() {
 		return instagram;
 	}
-	public void setName(String name) {
+
+	public InfluencerVO setName(String name) {
 		this.name = name;
+		return this;
 	}
-	public void setPhone(String phone) {
+
+	public InfluencerVO setPhone(String phone) {
 		this.phone = phone;
+		return this;
 	}
-	public void setEmail(String email) {
+
+	public InfluencerVO setEmail(String email) {
 		this.email = email;
+		return this;
 	}
-	public void setInstagram(String instagram) {
+
+	public InfluencerVO setInstagram(String instagram) {
 		this.instagram = instagram;
+		return this;
 	}
-	public List<SocialMediaFilter> getSocialMedia() {
+
+	public List<SocialMediaVO> getSocialMedia() {
 		return socialMedia;
+
 	}
-	public void setSocialMedia(List<SocialMediaFilter> socialMedia) {
+
+	public InfluencerVO setSocialMedia(List<SocialMediaVO> socialMedia) {
 		this.socialMedia = socialMedia;
+		return this;
 	}
+
 	public List<BankAccount> getBankAccounts() {
 		return bankAccounts;
 	}
-	public void setBankAccounts(List<BankAccount> bankAccounts) {
+
+	public InfluencerVO setBankAccounts(List<BankAccount> bankAccounts) {
 		this.bankAccounts = bankAccounts;
+		return this;
 	}
-	
-	
-	
-	
+
 }

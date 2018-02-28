@@ -1,6 +1,6 @@
-package br.com.influencers.filters;
+package br.com.influencers.ws.vo;
 
-public class SocialMediaFilter {
+public class SocialMediaVO {
 
 	private Long id;
 	private String name;
