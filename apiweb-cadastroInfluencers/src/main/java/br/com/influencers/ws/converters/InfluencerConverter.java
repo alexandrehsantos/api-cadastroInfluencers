@@ -99,9 +99,9 @@ public class InfluencerConverter {
 
 			List<BankAccountVO> voList = convertBanckAccountEntityToVO(influencer.getBankAccounts());
 
-			influencerVO.setEmail(influencer.getEmail()).setName(influencer.getName())
-					.setInstagram(influencer.getInstagram()).setPhone(influencer.getPhone()).setBankAccounts(voList)
-					.setSocialMedia(socialMediaVOList);
+			BeanUtils.copyProperties(influencer, influencerVO);
+
+			influencerVO.setBankAccounts(voList).setSocialMedia(socialMediaVOList);
 
 		}
 
