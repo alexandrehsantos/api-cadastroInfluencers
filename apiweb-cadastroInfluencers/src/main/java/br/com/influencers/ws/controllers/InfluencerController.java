@@ -25,15 +25,12 @@ public class InfluencerController {
 
 	@PostMapping
 	public ResponseEntity<Influencer> registerInfluencer(@RequestBody InfluencerVO filter) {
-
-		influencerService.save(filter);
-
 		return new ResponseEntity<>(influencerService.save(filter), HttpStatus.OK);
 	}
 
 	@GetMapping
 	public ResponseEntity<List<InfluencerVO>> getInfluencerBySocialMedia() {
-
+		System.out.println(new InfluencerVO());
 		return new ResponseEntity<>(influencerService.findAll(), HttpStatus.OK);
 
 	}

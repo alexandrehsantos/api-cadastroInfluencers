@@ -22,9 +22,9 @@ public class Influencer implements Serializable {
 	private String phone;
 	private String email;
 	private String instagram;
-	@ManyToMany
+	@ManyToMany 
 	private List<SocialMedia> socialNetworks;
-	@ManyToMany
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private List<BankAccount> bankAccounts;
 	
 

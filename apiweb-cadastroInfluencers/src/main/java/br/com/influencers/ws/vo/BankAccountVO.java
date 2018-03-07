@@ -2,33 +2,33 @@ package br.com.influencers.ws.vo;
 
 public class BankAccountVO {
 	private Long id;
-	private Long idBank;
-	private Long agencyNumber;
-	private Long accountNumber;
+	private String idBank;
+	private String agencyNumber;
+	private String accountNumber;
 	
 	
 	public Long getId() {
 		return id;
 	}
-	public Long getIdBank() {
+	public String getIdBank() {
 		return idBank;
 	}
-	public Long getAgencyNumber() {
+	public String getAgencyNumber() {
 		return agencyNumber;
 	}
-	public Long getAccountNumber() {
+	public String getAccountNumber() {
 		return accountNumber;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public void setIdBank(Long idBank) {
+	public void setIdBank(String idBank) {
 		this.idBank = idBank;
 	}
-	public void setAgencyNumber(Long agencyNumber) {
+	public void setAgencyNumber(String agencyNumber) {
 		this.agencyNumber = agencyNumber;
 	}
-	public void setAccountNumber(Long accountNumber) {
+	public void setAccountNumber(String accountNumber) {
 		this.accountNumber = accountNumber;
 	}
 	/* (non-Javadoc)
