@@ -15,12 +15,32 @@ import br.com.influencers.ws.vo.BankAccountVO;
 import br.com.influencers.ws.vo.InfluencerVO;
 import br.com.influencers.ws.vo.SocialMediaVO;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class InfluencerConverter.
+ */
 @Service
 public class InfluencerConverter {
 
+	/** The social media repository. */
 	@Autowired
 	private SocialMediaRepository socialMediaRepository;
 
+	/** The social media converter. */
+	@Autowired
+	private SocialMediaConverter socialMediaConverter;
+
+	/** The bank account converter. */
+	@Autowired
+	private BankAccountConverter bankAccountConverter;
+
+	/**
+	 * Vo to entity.
+	 *
+	 * @param vo
+	 *            the vo
+	 * @return the list
+	 */
 	public List<Influencer> voToEntity(List<InfluencerVO> vo) {
 		List<Influencer> entityList = new ArrayList<>();
 		if (vo != null) {
@@ -32,61 +52,55 @@ public class InfluencerConverter {
 		return entityList;
 	}
 
+	/**
+	 * Vo to entity.
+	 *
+	 * @param vo
+	 *            the vo
+	 * @return the influencer
+	 */
 	public Influencer voToEntity(InfluencerVO vo) {
 		Influencer entity = null;
 
 		if (vo != null) {
+
 			entity = new Influencer();
 
-			entity.setEmail(vo.getEmail());
-			entity.setInstagram(vo.getInstagram());
-			entity.setName(vo.getName());
-			entity.setPhone(vo.getPhone());
-
-			entity.setBankAccounts(bankAccountVoToEntity(vo.getBankAccounts()));
-			entity.setSocialNetworks(socialMediaVoToEntity(vo.getSocialMedia()));
+			BeanUtils.copyProperties(vo, entity);
 
 		}
 
 		return entity;
 	}
 
-	private List<SocialMedia> socialMediaVoToEntity(List<SocialMediaVO> voList) {
-		List<SocialMedia> socialNetworksEntityList = new ArrayList<>();
-
-		List<SocialMediaVO> socialMediaFilter = voList;
-		for (SocialMediaVO socialMedia : socialMediaFilter) {
-			socialNetworksEntityList.add(socialMediaRepository.findOne(socialMedia.getId()));
-		}
-		return socialNetworksEntityList;
-	}
-
-	private List<BankAccount> bankAccountVoToEntity(List<BankAccountVO> voList) {
-		List<BankAccount> bankAccountsEntityList = new ArrayList<>();
-		BankAccount bankAccount = null;
-		if (voList != null) {
-			List<BankAccountVO> bankAccounts = voList;
-			for (BankAccountVO bankItem : bankAccounts) {
-				bankAccount = new BankAccount();
-				bankAccount.setAccountNumber(bankItem.getAccountNumber());
-				bankAccount.setAgencyNumber(bankItem.getAgencyNumber());
-				bankAccount.setIdBank(bankItem.getIdBank());
-				bankAccountsEntityList.add(bankAccount);
-			}
-		}
-		return bankAccountsEntityList;
-	}
-
+	/**
+	 * Entity to VO.
+	 *
+	 * @param influencerEntityList
+	 *            the influencer entity list
+	 * @return the list
+	 */
 	public List<InfluencerVO> entityToVO(List<Influencer> influencerEntityList) {
 		List<InfluencerVO> influencerVOList = new ArrayList<>();
 
 		for (Influencer influencer : influencerEntityList) {
-			influencerVOList.add(entityToVO(influencer));
+			InfluencerVO vo = entityToVO(influencer);
+			vo.setBankAccounts(this.bankAccountConverter.entityToVO(influencer.getBankAccounts()));
+			vo.setSocialMediaList(this.socialMediaConverter.entityToVO(influencer.getSocialMediaList()));
+
+			influencerVOList.add(vo);
 		}
 
 		return influencerVOList;
 	}
 
+	/**
+	 * Entity to VO.
+	 *
+	 * @param influencer
+	 *            the influencer
+	 * @return the influencer VO
+	 */
 	public InfluencerVO entityToVO(Influencer influencer) {
 
 		InfluencerVO influencerVO = null;
@@ -95,44 +109,12 @@ public class InfluencerConverter {
 
 			influencerVO = new InfluencerVO();
 
-			List<SocialMediaVO> socialMediaVOList = convertSocialMediaEntityToVO(influencer.getSocilNetworks());
-
-			List<BankAccountVO> voList = convertBanckAccountEntityToVO(influencer.getBankAccounts());
-
 			BeanUtils.copyProperties(influencer, influencerVO);
-
-			influencerVO.setBankAccounts(voList).setSocialMedia(socialMediaVOList);
 
 		}
 
 		return influencerVO;
 
-	}
-
-	private List<BankAccountVO> convertBanckAccountEntityToVO(List<BankAccount> entityList) {
-		BankAccountVO bankAccountVO;
-		List<BankAccountVO> voList = new ArrayList<>();
-		if (entityList != null) {
-			for (BankAccount bankAccount : entityList) {
-				bankAccountVO = new BankAccountVO();
-				BeanUtils.copyProperties(bankAccount, bankAccountVO);
-				voList.add(bankAccountVO);
-			}
-		}
-		return voList;
-	}
-
-	private List<SocialMediaVO> convertSocialMediaEntityToVO(List<SocialMedia> entityList) {
-		SocialMediaVO socialMediaVO;
-		List<SocialMediaVO> voList = new ArrayList<>();
-		if (entityList != null) {
-			for (SocialMedia socialMediaEntity : entityList) {
-				socialMediaVO = new SocialMediaVO();
-				BeanUtils.copyProperties(socialMediaEntity, socialMediaVO);
-				voList.add(socialMediaVO);
-			}
-		}
-		return voList;
 	}
 
 }

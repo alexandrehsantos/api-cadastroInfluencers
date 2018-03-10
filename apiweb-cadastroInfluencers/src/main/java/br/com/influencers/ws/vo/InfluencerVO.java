@@ -9,7 +9,7 @@ public class InfluencerVO {
 	private String phone;
 	private String email;
 	private String instagram;
-	private List<SocialMediaVO> socialMedia;
+	private List<SocialMediaVO> socialMediaList;
 	private List<BankAccountVO> bankAccounts;
 
 	public String getName() {
@@ -48,13 +48,13 @@ public class InfluencerVO {
 		return this;
 	}
 
-	public List<SocialMediaVO> getSocialMedia() {
-		return socialMedia;
+	public List<SocialMediaVO> getSocialMediaList() {
+		return socialMediaList;
 
 	}
 
-	public InfluencerVO setSocialMedia(List<SocialMediaVO> socialMedia) {
-		this.socialMedia = socialMedia;
+	public InfluencerVO setSocialMediaList(List<SocialMediaVO> socialMedia) {
+		this.socialMediaList = socialMedia;
 		return this;
 	}
 

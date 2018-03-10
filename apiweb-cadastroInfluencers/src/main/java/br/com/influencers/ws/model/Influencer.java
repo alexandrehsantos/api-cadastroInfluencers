@@ -22,9 +22,9 @@ public class Influencer implements Serializable {
 	private String phone;
 	private String email;
 	private String instagram;
-	@ManyToMany 
-	private List<SocialMedia> socialNetworks;
-	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@ManyToMany(cascade = CascadeType.ALL)
+	private List<SocialMedia> socialMediaList;
+	@ManyToMany(cascade = {CascadeType.ALL, CascadeType.MERGE})
 	private List<BankAccount> bankAccounts;
 	
 
@@ -48,8 +48,8 @@ public class Influencer implements Serializable {
 		return instagram;
 	}
 
-	public List<SocialMedia> getSocilNetworks() {
-		return socialNetworks;
+	public List<SocialMedia> getSocialMediaList() {
+		return socialMediaList;
 	}
 
 	public void setId(Long id) {
@@ -62,7 +62,7 @@ public class Influencer implements Serializable {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
-	}
+	}	
 
 	public void setEmail(String email) {
 		this.email = email;
@@ -72,8 +72,8 @@ public class Influencer implements Serializable {
 		this.instagram = instagram;
 	}
 
-	public void setSocialNetworks(List<SocialMedia> socilNetworks) {
-		this.socialNetworks = socilNetworks;
+	public void setSocialMediaList(List<SocialMedia> socilNetworks) {
+		this.socialMediaList = socilNetworks;
 	}
 
 	@Override
